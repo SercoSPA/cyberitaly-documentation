@@ -1,0 +1,36 @@
+# Certificate subjects for the CyberItaly monitoring stack.
+# Add the REAL IP addresses of each VM under `ip:` so that certificate
+# hostname verification works when components talk to each other and when
+# the Kubernetes Elastic Agents connect to Fleet Server / Elasticsearch.
+#
+# Re-run scripts/01-generate-certs.sh after editing this file.
+instances:
+  # Elasticsearch HTTP + transport (lives on ci-mon-db-01)
+  - name: elasticsearch
+    dns:
+      - elasticsearch
+      - ci-mon-db-01
+      - localhost
+    ip:
+      - 127.0.0.1
+      # - 10.0.0.11        # <-- ci-mon-db-01 IP
+
+  # Kibana HTTPS server (lives on ci-mon-dash-01)
+  - name: kibana
+    dns:
+      - kibana
+      - ci-mon-dash-01
+      - localhost
+    ip:
+      - 127.0.0.1
+      # - 10.0.0.12        # <-- ci-mon-dash-01 IP
+
+  # Fleet Server HTTPS endpoint (lives on ci-mon-dash-01, reached by k8s agents)
+  - name: fleet-server
+    dns:
+      - fleet-server
+      - ci-mon-dash-01
+      - localhost
+    ip:
+      - 127.0.0.1
+      # - 10.0.0.12        # <-- ci-mon-dash-01 IP

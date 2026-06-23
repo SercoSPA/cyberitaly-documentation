@@ -1,0 +1,78 @@
+server.name: kibana
+server.host: "0.0.0.0"
+server.publicBaseUrl: "https://ci-mon-dash-01:5601"
+
+# --- Kibana HTTPS (browser-facing) ---
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/kibana/config/certs/kibana/kibana.crt
+server.ssl.key: /usr/share/kibana/config/certs/kibana/kibana.key
+
+# --- Connection to Elasticsearch on ci-mon-db-01 ---
+elasticsearch.hosts: ["https://ci-mon-db-01:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "${KIBANA_PASSWORD}"
+elasticsearch.ssl.certificateAuthorities:
+  ["/usr/share/kibana/config/certs/ca/ca.crt"]
+
+# --- Encryption keys (saved objects, sessions, reporting) ---
+# Each must be >= 32 chars. Supplied via environment in docker-compose.yml.
+xpack.encryptedSavedObjects.encryptionKey: "${ENCRYPTION_KEY}"
+xpack.security.encryptionKey: "${SECURITY_ENCRYPTION_KEY}"
+xpack.reporting.encryptionKey: "${REPORTING_ENCRYPTION_KEY}"
+
+# =====================================================================
+# Fleet pre-configuration
+# Kibana sets up Fleet, the integrations, the policies and the default
+# Elasticsearch output on first boot so the stack is usable immediately.
+# =====================================================================
+
+# Where agents and Fleet Server reach Fleet Server / Elasticsearch.
+xpack.fleet.agents.fleet_server.hosts: ["https://ci-mon-dash-01:8220"]
+xpack.fleet.agents.elasticsearch.hosts: ["https://ci-mon-db-01:9200"]
+
+# Integrations to install up front.
+xpack.fleet.packages:
+  - name: fleet_server
+    version: latest
+  - name: system
+    version: latest
+  - name: kubernetes
+    version: latest
+
+# Default Elasticsearch output. Remote k8s agents trust the ES certificate
+# via the CA fingerprint (see CA_TRUSTED_FINGERPRINT / scripts/04-ca-fingerprint.sh).
+xpack.fleet.outputs:
+  - id: fleet-default-output
+    name: default
+    type: elasticsearch
+    hosts: ["https://ci-mon-db-01:9200"]
+    is_default: true
+    is_default_monitoring: true
+    ca_trusted_fingerprint: "${CA_TRUSTED_FINGERPRINT}"
+
+# Agent policies.
+xpack.fleet.agentPolicies:
+  # Policy bound to the local Fleet Server container on dash-01.
+  - name: Fleet Server Policy
+    id: fleet-server-policy
+    namespace: default
+    is_default_fleet_server: true
+    monitoring_enabled: ["logs", "metrics"]
+    package_policies:
+      - name: fleet_server-1
+        package:
+          name: fleet_server
+
+  # Policy that the Kubernetes Elastic Agent DaemonSet enrolls into.
+  # Collects container logs + Kubernetes/state/system metrics from the cluster.
+  - name: Kubernetes Cluster Policy
+    id: k8s-cluster-policy
+    namespace: default
+    monitoring_enabled: ["logs", "metrics"]
+    package_policies:
+      - name: kubernetes-1
+        package:
+          name: kubernetes
+      - name: system-1
+        package:
+          name: system

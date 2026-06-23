@@ -1,0 +1,69 @@
+# Heartbeat — uptime/availability monitoring for the monitoring stack itself
+# and for the applications running in the Kubernetes cluster.
+#
+# Runs as a standalone Beat on ci-mon-dash-01 and ships directly to
+# Elasticsearch on ci-mon-db-01.
+
+heartbeat.monitors:
+  # --- Monitoring stack endpoints ---
+  - type: http
+    id: elasticsearch-http
+    name: Elasticsearch (ci-mon-db-01)
+    schedule: "@every 30s"
+    urls: ["https://ci-mon-db-01:9200"]
+    ssl.certificate_authorities: ["certs/ca/ca.crt"]
+    check.request.method: GET
+    username: "elastic"
+    password: "${ELASTIC_PASSWORD}"
+    check.response.status: [200]
+
+  - type: http
+    id: kibana-http
+    name: Kibana (ci-mon-dash-01)
+    schedule: "@every 30s"
+    urls: ["https://ci-mon-dash-01:5601/api/status"]
+    ssl.certificate_authorities: ["certs/ca/ca.crt"]
+    check.response.status: [200]
+
+  - type: tcp
+    id: fleet-server-tcp
+    name: Fleet Server (ci-mon-dash-01:8220)
+    schedule: "@every 30s"
+    hosts: ["ci-mon-dash-01:8220"]
+
+  # --- Application endpoints in the Kubernetes cluster ---
+  # Add one block per app you want to track for availability. Examples:
+  #
+  # - type: http
+  #   id: myapp-ingress
+  #   name: MyApp (ingress)
+  #   schedule: "@every 30s"
+  #   urls: ["https://myapp.k8s.example.com/healthz"]
+  #   check.response.status: [200]
+  #
+  # - type: icmp
+  #   id: node-ping
+  #   name: K8s nodes
+  #   schedule: "@every 1m"
+  #   hosts: ["10.0.1.21", "10.0.1.22", "10.0.1.23"]
+
+# --- Output ---
+output.elasticsearch:
+  hosts: ["https://ci-mon-db-01:9200"]
+  username: "elastic"
+  password: "${ELASTIC_PASSWORD}"
+  ssl.certificate_authorities: ["certs/ca/ca.crt"]
+
+# --- Kibana (loads Heartbeat/Uptime dashboards on first run) ---
+setup.kibana:
+  host: "https://ci-mon-dash-01:5601"
+  ssl.certificate_authorities: ["certs/ca/ca.crt"]
+
+setup.template.settings:
+  index.number_of_replicas: 0
+
+# Single-node ES => no replicas
+setup.ilm.enabled: true
+
+processors:
+  - add_observer_metadata: ~

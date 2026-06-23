@@ -1,0 +1,17 @@
+# Secrets and generated material — never commit these
+.env
+db-01/.env
+dash-01/.env
+
+# Generated certificates
+certs/ca/
+certs/elasticsearch/
+certs/kibana/
+certs/fleet-server/
+certs/*.zip
+*.crt
+*.key
+*.p12
+
+# keep the example files
+!**/.env.example
