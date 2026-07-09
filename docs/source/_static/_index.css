@@ -1,0 +1,75 @@
+/* CGI Color Palette Configuration
+
+This stylesheet customizes elements by overriding some default behaviors provided by the pydata_sphinx_theme. 
+
+CGI Color Palette:
+  - Red: #e41937
+  - Purple: #493194
+  - Gradient: linear-gradient(90deg, #e41937 0%, #5236ab 100%)
+  - Gray: #353535
+  - Black: #1f1f1f
+*/
+
+/* Ensuring font availability without relying on external connections */
+@font-face {
+  font-family: "Roboto-Regular";
+  src: local("Roboto-Regular"),
+    url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto-Bold";
+  src: local("Roboto-Bold"),
+    url(./fonts/Roboto/Roboto-Bold.ttf) format("truetype");
+}
+
+/* Global font settings */
+* {
+  font-family: "Roboto-Regular", Fallback, sans-serif !important;
+}
+
+html[data-theme="light"] {
+  --pst-color-primary: #493194;
+  --pst-color-primary-highlight: #493194;
+  --pst-color-secondary: #493194;
+  --pst-color-surface: #8466df40;
+  --pst-color-info-bg: #8466df40;
+  --pst-color-info: #493194;
+}
+
+/* Dark theme color configuration */
+html[data-theme="dark"] {
+  --pst-color-primary: #957ce1;
+  --pst-color-primary-highlight: #957ce1;
+  --pst-color-secondary: #957ce1;
+  --pst-color-on-background: #353535;
+  --pst-color-background: #1f1f1f;
+  --pst-color-surface: #8466df40;
+  --pst-color-info-bg: #493194;
+  --pst-color-info: white;
+}
+
+/* Override horizontal spacing for main content area */
+.bd-main .bd-content .bd-article-container {
+  max-width: 100%;
+  /* default is 60em */
+}
+
+.bd-page-width {
+  max-width: 100%;
+  /* default is 88rem */
+}
+
+/* Adjusts the logo appearance in the navbar */
+.navbar-brand.logo .logo__image {
+  max-width: 68px;
+  height: auto;
+}
+
+/* Customize 'Back to Top' button with CGI gradient */
+#pst-back-to-top {
+  background-color: -webkit-linear-gradient(90deg, #e41937 0%, #5236ab 100%);
+  background-image: -webkit-linear-gradient(90deg, #e41937 0%, #5236ab 100%);
+  background-image: -o-linear-gradient(90deg, #e41937 0%, #5236ab 100%);
+  background-image: linear-gradient(90deg, #e41937 0%, #5236ab 100%);
+}
