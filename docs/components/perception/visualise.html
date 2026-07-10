@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data visualisation and analytics &#8212; IRIDE CyberItaly Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/./_index.css?v=10331838" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'components/perception/visualise';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CyberItaly data processing management and development" href="../intellect/index.html" />
+    <link rel="prev" title="Data discovery" href="discover.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt=""/>
+    <img src="../../_static/logo.png" class="logo__image only-light pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">IRIDE CyberItaly Documentation - 1.0.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../intro.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../digitaltwinmanuals.html">
+    Digital Twins User Manuals
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Components
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../known_issues.html">
+    Known Issues
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/SercoSPA/cyberitaly-documentation" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../intro.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../digitaltwinmanuals.html">
+    Digital Twins User Manuals
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Components
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../known_issues.html">
+    Known Issues
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/SercoSPA/cyberitaly-documentation" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Key concepts</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">CyberItaly Visualization and Analytics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="discover.html">Data discovery</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data visualisation and analytics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intellect/index.html">CyberItaly data processing management and development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intellect/process.html">Process some data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intellect/systematic.html">Systematic Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intellect/event.html">Event Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intellect/monitor.html">Monitor your processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intellect/develop.html">Integrate your own algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intellect/services/index.html">Processing Services</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../awareness.html">CyberItaly Storage and Account Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synthesis.html">CyberItaly EO Dashboards and Analytics</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Components</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">CyberItaly Visualization and Analytics</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Data visualisation and analytics</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="data-visualisation-and-analytics">
+<span id="visualise"></span><h1>Data visualisation and analytics<a class="headerlink" href="#data-visualisation-and-analytics" title="Link to this heading">&#128279</a></h1>
+<p>CyberItaly Visualization and Analytics stands out for its visualisation and analytics capabilities, transforming complex data into clear and actionable insights. It offers a suite of features, including:</p>
+<ul class="simple">
+<li><p>Shared visualization: Collaborate effectively with your team or other organisations by leveraging pre-built visualizations.</p></li>
+<li><p>Customizable views: Tailor your views to suit your needs. Highlight the metrics that matter most to gain a focused view of your data.</p></li>
+</ul>
+<p>This guide provides you with the knowledge to utilize CyberItaly Visualization and Analytics’s most common features. <em>However, the platform’s true power lies in its adaptability.</em></p>
+<p><strong>Ready to take your data analysis to the next level?</strong></p>
+<p>Our support team is here to help you unlock the full potential of CyberItaly Visualization and Analytics for your unique use case. Don’t hesitate to reach out to us at <a class="reference external" href="mailto:cyberitaly&#37;&#52;&#48;jira-serco&#46;atlassian&#46;net">cyberitaly<span>&#64;</span>jira-serco<span>&#46;</span>atlassian<span>&#46;</span>net</a>.</p>
+<a class="reference internal image-reference" href="../../_images/perception_1.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_1.png" style="width: 60%;" />
+</a>
+<section id="catalog-results">
+<span id="id1"></span><h2>Catalog results<a class="headerlink" href="#catalog-results" title="Link to this heading">&#128279</a></h2>
+<p>As a user, you can visualise results from the Catalog’s searches, depending on the nature of the data.
+When the data is suitable for visualisation, a button <em>Add to map</em> appears within the related card:</p>
+<a class="reference internal image-reference" href="../../_images/perception_9.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_9.png" style="width: 40%;" />
+</a>
+<p>A visualisation is also called a <em>Layer</em>, as it is shown as a layer on top of the map.</p>
+<p>To learn more about the tools at your disposal, refer to <a class="reference internal" href="#tools"><span class="std std-ref">Tools</span></a>.</p>
+<p>Even when visualizations aren’t available, data can still be geolocated on the map. This functionality, as demonstrated with <a class="reference external" href="https://www.copernicus.eu/en">Copernicus data</a> below, allows for easier exploration and selection of datasets for further processing.</p>
+</section>
+<section id="my-storage-content">
+<h2>My storage Content<a class="headerlink" href="#my-storage-content" title="Link to this heading">&#128279</a></h2>
+<p>The data stored in My storage can be visualized on the map and analyzed, when appropriate, using the same tools available for <a class="reference internal" href="#catalog-results"><span class="std std-ref">Catalog results</span></a>.</p>
+</section>
+<section id="tools">
+<span id="id2"></span><h2>Tools<a class="headerlink" href="#tools" title="Link to this heading">&#128279</a></h2>
+<section id="visualisation">
+<h3>Visualisation<a class="headerlink" href="#visualisation" title="Link to this heading">&#128279</a></h3>
+<section id="workspace">
+<h4>Workspace<a class="headerlink" href="#workspace" title="Link to this heading">&#128279</a></h4>
+<p>The <em>Add to map</em> button provides a convenient way to incorporate enabled layers into your current workspace. By clicking this button, you effectively add the selected layer to your ongoing analysis, allowing you to explore and examine its data in conjunction with other map elements. While the addition of the layer to your workspace is not automatically saved, you can easily persist your changes by saving your current project. This feature is especially valuable for those who wish to continue their analysis at a later time, ensuring that their progress is preserved and easily accessible.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_5.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_5.png" style="width: 50%;" />
+</a>
+</section>
+<section id="swipe">
+<span id="id3"></span><h4>Swipe<a class="headerlink" href="#swipe" title="Link to this heading">&#128279</a></h4>
+<p>The swipe tool enables a side-by-side comparison of multiple visualizations, or layers, on the map. By adjusting the <a class="reference internal" href="#opacity"><span class="std std-ref">Opacity</span></a> of one or more layers, you can effectively compare them to a selected layer.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_1.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_1.png" style="width: 50%;" />
+</a>
+</section>
+<section id="opacity">
+<span id="id4"></span><h4>Opacity<a class="headerlink" href="#opacity" title="Link to this heading">&#128279</a></h4>
+<p>The opacity tool enables users to adjust the transparency of each layer added to the map, providing greater control over the visibility and blending of different map elements.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_2.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_2.png" style="width: 50%;" />
+</a>
+</section>
+<section id="legend">
+<h4>Legend<a class="headerlink" href="#legend" title="Link to this heading">&#128279</a></h4>
+<p>The legend, when available for the layers, provides context for interpreting the data. It offers additional information, such as color scales, which aid in understanding the meaning and relative values of different features on the map.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_3.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_3.png" style="width: 50%;" />
+</a>
+</section>
+<section id="time-navigation">
+<h4>Time navigation<a class="headerlink" href="#time-navigation" title="Link to this heading">&#128279</a></h4>
+<p>The time navigation tool, located at the bottom of the map for enabled layers like NASA GIBS’s MLS_Temperature_46hPa_Day, allows you to explore data over time. This interactive feature is designed for layers that offer a time series, enabling users to visualize and analyze changes in data values over a specified period.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_4.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_4.png" style="width: 50%;" />
+</a>
+</section>
+<section id="data-filters-vector">
+<h4>Data filters (vector)<a class="headerlink" href="#data-filters-vector" title="Link to this heading">&#128279</a></h4>
+<p>Data filters, available for vector data, provide a tool for refining your analysis and focusing on specific features of interest. By applying filters, you can selectively display data on the map, isolating relevant information and enhancing your understanding of complex datasets.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_6.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_6.png" style="width: 50%;" />
+</a>
+</section>
+</section>
+<section id="analytics">
+<h3>Analytics<a class="headerlink" href="#analytics" title="Link to this heading">&#128279</a></h3>
+<p>The data analytics tools, accessible through the <em>graph</em> icon for each enabled layer, offer a suite of options tailored to both raster and vector datasets. Explore them in the following sections to discover the analytical capabilities that align with your specific data and research objectives.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_7.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_7.png" style="width: 20%;" />
+</a>
+<p><em>TIP:</em> If you’re having trouble locating data analytics tools, try minimizing the discover panel on the right. The tools might be hidden behind it!</p>
+<section id="point-series-raster">
+<h4>Point series (raster)<a class="headerlink" href="#point-series-raster" title="Link to this heading">&#128279</a></h4>
+<p>This feature is coming soon. <em>Stay tuned, more information will come on this topic!</em></p>
+</section>
+<section id="transect-values-raster">
+<h4>Transect values (raster)<a class="headerlink" href="#transect-values-raster" title="Link to this heading">&#128279</a></h4>
+<p>This feature is coming soon. <em>Stay tuned, more information will come on this topic!</em></p>
+</section>
+<section id="area-statistics-raster">
+<h4>Area statistics (raster)<a class="headerlink" href="#area-statistics-raster" title="Link to this heading">&#128279</a></h4>
+<p>Area statistics calculates key metrics like minimum, maximum, variance, standard deviation, and median for a variable within a defined area. An accompanying histogram visually represents the data’s distribution.</p>
+<img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_8.png" />
+</section>
+<section id="area-series-raster">
+<h4>Area series (raster)<a class="headerlink" href="#area-series-raster" title="Link to this heading">&#128279</a></h4>
+<p>This feature is coming soon. <em>Stay tuned, more information will come on this topic!</em></p>
+</section>
+<section id="distribution-analysis-vector">
+<h4>Distribution analysis (vector)<a class="headerlink" href="#distribution-analysis-vector" title="Link to this heading">&#128279</a></h4>
+<p>The data distribution analysis tools enable you to examine how data is distributed within a vector product. You can select specific variables to analyze and group the results by another variable.</p>
+<a class="reference internal image-reference" href="../../_images/perception_tools_9.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_9.png" style="width: 40%;" />
+</a>
+<img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_10.png" />
+</section>
+<section id="time-distribution-vector">
+<h4>Time distribution (vector)<a class="headerlink" href="#time-distribution-vector" title="Link to this heading">&#128279</a></h4>
+<p>This feature is coming soon. <em>Stay tuned, more information will come on this topic!</em></p>
+</section>
+<section id="data-table-vector">
+<h4>Data table (vector)<a class="headerlink" href="#data-table-vector" title="Link to this heading">&#128279</a></h4>
+<p>Data table provides an organized view of your data in a tabular format, complete with filtering options for easy data exploration.</p>
+<img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_tools_11.png" />
+</section>
+</section>
+</section>
+<section id="map-settings">
+<h2>Map settings<a class="headerlink" href="#map-settings" title="Link to this heading">&#128279</a></h2>
+<p>Adjust your map settings by clicking the gear icon in the top right corner. This opens a panel on the right side where you can personalize your map experience:</p>
+<a class="reference internal image-reference" href="../../_images/perception_13.png"><img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_13.png" style="width: 30%;" />
+</a>
+<ul class="simple">
+<li><p><em>Map background</em>: Choose from different base layers like Sentinel-2 satellite imagery, Bing maps, or OpenStreetMap.</p></li>
+<li><dl class="simple">
+<dt><em>Map rendering mode</em>: Switch between a flat 2D view or an immersive 3D perspective.</dt><dd><ul>
+<li><p><em>3D Mode</em>: In 3D mode, unlock full rotation freedom around all axes instead of the default vertical axis only.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>Map projection</em>: Select between Geographic and Mercator projections for a map representation that best suits your needs.</p></li>
+</ul>
+<img alt="CyberItaly Visualization and Analytics" src="../../_images/perception_14.png" />
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="discover.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data discovery</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../intellect/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CyberItaly data processing management and development</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#catalog-results">Catalog results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-storage-content">My storage Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisation">Visualisation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#swipe">Swipe</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#opacity">Opacity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#legend">Legend</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-navigation">Time navigation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-filters-vector">Data filters (vector)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytics">Analytics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#point-series-raster">Point series (raster)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transect-values-raster">Transect values (raster)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#area-statistics-raster">Area statistics (raster)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#area-series-raster">Area series (raster)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-analysis-vector">Distribution analysis (vector)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-distribution-vector">Time distribution (vector)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-table-vector">Data table (vector)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#map-settings">Map settings</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/components/perception/visualise.rst"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (&#39;2026&#39;, &#39;IRIDE CyberItaly team&#39;).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
