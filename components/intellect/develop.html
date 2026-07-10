@@ -1,0 +1,837 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Integrate your own algorithm &#8212; IRIDE CyberItaly Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/./_index.css?v=10331838" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'components/intellect/develop';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Processing Services" href="services/index.html" />
+    <link rel="prev" title="Monitor your processing" href="monitor.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt=""/>
+    <img src="../../_static/logo.png" class="logo__image only-light pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">IRIDE CyberItaly Documentation - 1.0.0</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../intro.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../digitaltwinmanuals.html">
+    Digital Twins User Manuals
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Components
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../known_issues.html">
+    Known Issues
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/SercoSPA/cyberitaly-documentation" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../intro.html">
+    Introduction
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../digitaltwinmanuals.html">
+    Digital Twins User Manuals
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Components
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../faq.html">
+    FAQs
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../known_issues.html">
+    Known Issues
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/SercoSPA/cyberitaly-documentation" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Key concepts</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../perception/index.html">CyberItaly Visualization and Analytics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../perception/discover.html">Data discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../perception/visualise.html">Data visualisation and analytics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">CyberItaly data processing management and development</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="process.html">Process some data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="systematic.html">Systematic Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event.html">Event Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Monitor your processing</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Integrate your own algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services/index.html">Processing Services</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../awareness.html">CyberItaly Storage and Account Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../synthesis.html">CyberItaly EO Dashboards and Analytics</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Components</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">CyberItaly data processing management and development</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Integrate your own algorithm</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="integrate-your-own-algorithm">
+<span id="develop"></span><h1>Integrate your own algorithm<a class="headerlink" href="#integrate-your-own-algorithm" title="Link to this heading">&#128279</a></h1>
+<p>CyberItaly data processing management and development allows you to seamlessly integrate your own algorithm. Generally speaking, it is possible to integrate any program running on Linux.
+Once integrated, an algorithm becomes a <em>service</em>. This section explains the steps to achieve this result.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">&#128279</a></h2>
+<p>The feature is only available to users with role <em>Expert User</em>.</p>
+</section>
+<section id="accessing-the-feature">
+<h2>Accessing the feature<a class="headerlink" href="#accessing-the-feature" title="Link to this heading">&#128279</a></h2>
+<ul class="simple">
+<li><p>Visit <a class="reference external" href="https://iride-cyberitaly.space/intellect/">https://iride-cyberitaly.space/intellect/</a>.</p></li>
+<li><p>Click on <em>Integrate your own algorithm</em>.</p></li>
+<li><p>Identify the card <em>Processing services</em> and click on it.</p></li>
+</ul>
+<a class="reference internal image-reference" href="../../_images/intellect_develop_1.png"><img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_1.png" style="width: 50%;" />
+</a>
+</section>
+<section id="creating-a-new-service">
+<h2>Creating a new service<a class="headerlink" href="#creating-a-new-service" title="Link to this heading">&#128279</a></h2>
+<p>CyberItaly data processing management and development packages the algorithms and their dependencies (e.g., libraries, executable, etc.)  as <a class="reference external" href="https://docs.docker.com/guides/docker-concepts/the-basics/what-is-an-image/">Docker images</a> and execute them within <a class="reference external" href="https://docs.docker.com/guides/docker-concepts/the-basics/what-is-a-container/">Docker containers</a>.</p>
+<p>To proceed:</p>
+<ul class="simple">
+<li><p>Click on the ‘+’ button.</p></li>
+<li><p>Select the <em>Service Template</em> (see <a class="reference internal" href="#descriptor"><span class="std std-ref">Descriptor</span></a> for details).</p></li>
+<li><p>As a start, select <em>Processor</em>, then <em>Empty</em>.</p></li>
+<li><p>Provide the <em>Name</em>, that is the service name</p>
+<ul>
+<li><p>It has to start with a letter, and only contain letters and numbers. No spaces or special characters allowed.</p></li>
+</ul>
+</li>
+<li><p>Provide the <em>Title</em>. This can be used to give a user friendly name to the service.</p></li>
+<li><p>Provide the <em>Description</em>. That is a natural language description of the service.</p></li>
+<li><p>Type the <em>Provider</em>. This is useful to identify the entity or person providing the service.</p></li>
+<li><p>Type the <em>Version</em>.</p>
+<ul>
+<li><p>It is suggested to use <a class="reference external" href="https://semver.org/">semantic versioning</a>.</p></li>
+</ul>
+</li>
+<li><p>Click on the <em>OK</em> button</p>
+<ul>
+<li><p>TIP: The button is located at the bottom of the page. If it not visible, try to use the tab key.</p></li>
+</ul>
+</li>
+<li><p>See a screen similar to:</p></li>
+</ul>
+<img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_2.png" />
+<p>As a next step, let’s define the service specification.</p>
+</section>
+<section id="service-specification">
+<span id="id1"></span><h2>Service Specification<a class="headerlink" href="#service-specification" title="Link to this heading">&#128279</a></h2>
+<p>The service specification is composed of several tab:</p>
+<ul class="simple">
+<li><p>The <em>Descriptor</em> tab describe properties of the service, including its name, title, description, version, service type, and resources.</p></li>
+<li><p>The <em>Sources</em> tab allows the creation of the files that compose the service.</p></li>
+<li><p>The <em>Input definitions</em> tab is used for the specification of the service inputs.</p></li>
+<li><p>The <em>Output definitions</em> tab is used for the specification of the service outputs.</p></li>
+</ul>
+<section id="descriptor">
+<span id="id2"></span><h3>Descriptor<a class="headerlink" href="#descriptor" title="Link to this heading">&#128279</a></h3>
+<p>In the top fields, the service metadata (name, title, description) plus the additional version field can be edited.</p>
+<p>The <em>Docker tag</em> that is associated to the service is immutably generated on service creation.</p>
+<p>The <em>Service type</em> field can be used to change the service type. The possible values are:</p>
+<ul class="simple">
+<li><p><em>Processor</em>: A processor is an algorithm that is executed without user intervention. Processors start with a user specified entry point script and terminate when this script terminates. The execution of a processor will trigger the creation of a processing job.</p></li>
+<li><p><em>Parallel Processor</em>: A parallel processor is able to trigger more instances of the processor based on an input with a multiplicity higher than 1 (e.g., a databasket or a list of input files). The execution of a parallel processor triggers the creation of a parent job and as many child job as the number of inputs provided for the execution. The parallel processor must identify a specific input parameter that will receive the different instances of the multiple input. The other input parameters will be passed unchanged to all the processing job generated. More on this in section.</p></li>
+<li><p><em>Application</em>: An application is a service that requires user interaction. This kind of service is typically used to provide a service with a GUI or Web UI. The service execution is not bound to terminate when the end of its entry point is reached.</p></li>
+<li><p><em>FTP harvester</em>. Not used and it will be deprecated soon.</p></li>
+<li><p><em>WPS service</em>. Not used and it will be deprecated soon.</p></li>
+</ul>
+<p>The <em>Required resources</em> section provides a way to define the amount of Storage, CPU, Memory and GPU a single job should use.</p>
+</section>
+<section id="sources">
+<h3>Sources<a class="headerlink" href="#sources" title="Link to this heading">&#128279</a></h3>
+<p>Through the <em>Sources</em> tab, users can create the different files that compose the processing service. A minimum of two mandatory files must be specified:</p>
+<ul class="simple">
+<li><p><em>A Dockerfile</em> is a text document that contains all the commands a user could call on the command line to assemble an image.</p></li>
+<li><p><strong>An entrypoint</strong>, referenced in the Dockerfile through the ENTRYPOINT instruction, defines where the execution of the container starts at runtime. A default Bash entrypoint called <em>workflow.sh</em> is provided by the platform as a template when the processor is created. The user is free to change the entrypoint with any other script.</p></li>
+</ul>
+<p>A code editor provides a way for the user to create the content of the file supported by a syntax highlighting feature for his language of choice.</p>
+<p>If the file to be created is supposed to be executable, the <em>Executable</em> checkbox should be ticked.</p>
+<p>The interface supports the specification of text files. Any binary file should instead be managed through the Dockerfile, e.g. by installing or downloading binary files available at external sites.</p>
+<a class="reference internal image-reference" href="../../_images/intellect_develop_3.png"><img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_3.png" style="width: 50%;" />
+</a>
+<a class="reference internal image-reference" href="../../_images/intellect_develop_4.png"><img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_4.png" style="width: 50%;" />
+</a>
+</section>
+<section id="input-definitions">
+<h3>Input definitions<a class="headerlink" href="#input-definitions" title="Link to this heading">&#128279</a></h3>
+<p>Through the input definition tab, the user specifies how the service will expose its input and interact with CyberItaly data processing management and development to get them.</p>
+<p>For each input managed by the service, the user has to enter a definition that includes:</p>
+<ol class="arabic simple">
+<li><p>The input id, a string used to identify the input inside the service.</p></li>
+<li><p>The input title, a human readable name for this input.</p></li>
+<li><p>The input description, a longer natural text description of this input , used on the workspace panel.</p></li>
+<li><dl class="simple">
+<dt>The input type, which can be:</dt><dd><ol class="loweralpha simple">
+<li><p>A literal value, i.e. a string, number or enum.</p></li>
+<li><p>A complex value, i.e. a catalog product, an AOI, a date.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>The input default value, used when no value is provided by users when the service is launched</p></li>
+<li><p>If the input is required.</p></li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/intellect_develop_5.png"><img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_5.png" style="width: 50%;" />
+</a>
+<section id="behaviour-for-inputs">
+<h4>Behaviour for inputs<a class="headerlink" href="#behaviour-for-inputs" title="Link to this heading">&#128279</a></h4>
+<p>CyberItaly data processing management and development will behave as follows with respect to service inputs:</p>
+<ol class="arabic simple">
+<li><p>Any number, date, AOI or simple string that is expected by a service will be delivered to its container in the form of a file (<code class="docutils literal notranslate"><span class="pre">/home/worker/workDir/FSTEP-WPS-INPUT.properties</span></code>) containing a line for each input in the form <code class="docutils literal notranslate"><span class="pre">ID=VALUE</span></code>.</p></li>
+</ol>
+<p><em>Example</em></p>
+<p>The user defines an input with <code class="docutils literal notranslate"><span class="pre">rounding</span></code> of type number. A user invokes this service passing as arguments the value <code class="docutils literal notranslate"><span class="pre">0.5</span></code>. CyberItaly data processing management and development will create inside the container the file <code class="docutils literal notranslate"><span class="pre">/home/worker/workDir/FSTEP-WPS-INPUT.properties</span></code> with the following content:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">rounding</span><span class="o">=</span><span class="m">0</span>.5
+</pre></div>
+</div>
+<p>By reading this file, the service can then use the provided value as part of its computation. In a Bash script, this file will typically be read with the source command so that after the execution of that command all the input IDs and values will be available as environment variables.</p>
+<ol class="arabic simple" start="2">
+<li><p>For any Catalog product, CyberItaly data processing management and development will place the resource content in a subfolder of <code class="docutils literal notranslate"><span class="pre">/home/worker/workDir/inDir</span></code> having the input ID as name.</p></li>
+</ol>
+<p><em>Example</em></p>
+<p>The user defines an input with ID <code class="docutils literal notranslate"><span class="pre">s2tile</span></code> of type Catalogue product. A user invokes this service passing as arguments the value:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">desp:///S2A_MSIL1C_20180312T124041_N0206_R052_T26SNE_20180312T125451.SAFE</span>
+</pre></div>
+</div>
+<p>The platform will put the Sentinel-2 product corresponding to the above URI in the following folder within the Docker container:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/home/worker/workDir/inDir/s2tile</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>To designate an input parameter as the one that will receive the different input files in a parallel processing, its ID must be named <code class="docutils literal notranslate"><span class="pre">parallelInputs</span></code>. Inside the processor, this special field must be referenced through the ID input.</p></li>
+</ol>
+<p><em>Example</em></p>
+<p>The user defines an input with ID <code class="docutils literal notranslate"><span class="pre">parallelInputs</span></code> of type Catalogue product. A user invokes this service passing as arguments a data basket.</p>
+<p>The platform will create <em>n</em> jobs, each one with an item from a databasket that will be available in the following folder of the container:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/home/worker/workDir/inDir/input</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="output-definitions">
+<h3>Output definitions<a class="headerlink" href="#output-definitions" title="Link to this heading">&#128279</a></h3>
+<p>The output definition tab defines how the service will interact with the CyberItaly data processing management and development for the service outputs.</p>
+<p>For each output managed by the service, the user has to enter a definition that includes:</p>
+<ol class="arabic simple">
+<li><p>The output id, a string used to identify the output inside the service.</p></li>
+<li><p>The output title, a human readable name for this output.</p></li>
+<li><p>The output description, a longer natural text description of this output</p></li>
+<li><dl class="simple">
+<dt>The output format, which can be:</dt><dd><ol class="loweralpha simple">
+<li><p>A GeoTIFF. In this case the output will be considered for visualisation during the output publishing phase.</p></li>
+<li><p>A Shapefile. In this case the output will be considered for visualisation during the output publishing phase.</p></li>
+<li><p>Any other format.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>The output default value, used when no value is provided by service for that output.</p></li>
+<li><p>The output time regular expression, used by the platform to extract output timestamp metadata from the output file name, including start and/or end timestamps of the output product.</p></li>
+<li><p>The output Geoserver layer style, which should be existing already. This is only applicable to formats GeoTIFF and Shapefile.</p></li>
+</ol>
+<a class="reference internal image-reference" href="../../_images/intellect_develop_6.png"><img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_6.png" style="width: 50%;" />
+</a>
+<p><em>Time Regular Expression</em></p>
+<p>The time regular expression describes how the timestamps should be extracted from the file name. There are 2 options:</p>
+<ul class="simple">
+<li><p>ISO8601</p></li>
+<li><p>Custom</p></li>
+</ul>
+<p>The ISO8601 seeks in the output names a format compatible with the <a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 standard</a>.</p>
+<p>The custom option leverages named groups in the regexp. The supported named groups are:</p>
+<ul class="simple">
+<li><p>?&lt;start&gt; for a group that represents the product start date</p></li>
+<li><p>?&lt;end&gt; for a group that representes the product end date</p></li>
+<li><p>?&lt;startEnd&gt; for a group that represents both the product start and end date.</p></li>
+</ul>
+<p>The supported date and time format is “yyyyMMdd[[ ][‘T’]HHmm[ss][.SSS][XXX]]” which can be interpreted as:</p>
+<p>A mandatory year/month/day date with four digits for year, two for month and two for day followed by an optional time composed of</p>
+<ul class="simple">
+<li><p>An optional space followed by</p></li>
+<li><p>An Optional T symbol followed by</p></li>
+<li><p>Mandatory Hour and minutes fields followed by</p></li>
+<li><p>Optional seconds specification followed by</p></li>
+<li><p>Optional milliseconds specification followed by</p></li>
+<li><p>Optional Timezone.</p></li>
+</ul>
+<p>If not time is specified, Midnight UTC is assumed.</p>
+<p>If no time zone is specified, UTC is assumed.</p>
+<p><em>Example</em></p>
+<p>An NDVI service produces files that observe the convention <code class="docutils literal notranslate"><span class="pre">S2_NDVI_yyyyMMdd.tif</span></code>, where there is a single timestamp representing the product start and end time.</p>
+<p>The user should add a Time Regexp expression of the form:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&quot;S2_NDVI_(?&lt;startEnd&gt;\d{8}).tif&quot;</span>
+</pre></div>
+</div>
+<p>so that the CyberItaly data processing management and development will be able to extract from the file name and parse the corresponding timestamp (in this case, a date without a time) to represent the product start and end time.</p>
+<p><em>Example</em></p>
+<p>A change detection service produces files that observer the convention <code class="docutils literal notranslate"><span class="pre">S2_CHD_yyyyyMMddThhmm_yyyyyMMddThhmm.tif</span></code>, where the first block represents the time of the first image and the second block represents the time of the second more recent image.</p>
+<p>The developer should add a Time Regexp expression of the form:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&quot;S2_CHD_(?&lt;start&gt;\d{8}T\d{4})_(?&lt;end&gt;\d{8}T\d{4}).tif&quot;</span>
+</pre></div>
+</div>
+<p>so that CyberItaly data processing management and development will be able to extract from the file name and parse the two corresponding timestamps (in this case, dates with a time) to represent the product start and end time.</p>
+</section>
+<section id="behaviour-for-outputs">
+<h3>Behaviour for outputs<a class="headerlink" href="#behaviour-for-outputs" title="Link to this heading">&#128279</a></h3>
+<p>CyberItaly data processing management and development will behave as follows with respect to service outputs:</p>
+<ol class="arabic simple">
+<li><p>If a folder with the same name as an output id is defined inside the <code class="docutils literal notranslate"><span class="pre">/home/worker/workDir/outDir</span></code> folder, the content of that folder is saved as the service output for that id.</p></li>
+<li><p>If a file inside the folder is of a type supported for the visualisation, the geometry information is also extracted are saved as part of the output metadata. Currently, the supported file type are GeoTIFF and Shapefile.</p></li>
+<li><p>If a time regular expression is defined for that output, the start and/or end timestamps are extracted from the file name and saved as part of the output metadata.</p></li>
+</ol>
+</section>
+</section>
+<section id="building-the-image">
+<h2>Building the image<a class="headerlink" href="#building-the-image" title="Link to this heading">&#128279</a></h2>
+<p>At the end of the service specification process, it is necessary to build the Docker image that will be used to launch the service as a Docker container.</p>
+<p>At the top of the form, the string “Build required” means that that the step is necessary (e.g., after service creation or modification).</p>
+<p>Click on the <em>Build</em> button to start the process and wait for its completion. Depending on the amount and size of dependencies declared in the Dockerfile, this process can take several minutes. At the end of the process, it should look like the following image, and the service is ready to run (see <a class="reference internal" href="process.html#run-service"><span class="std std-ref">Running a service</span></a>).</p>
+<a class="reference internal image-reference" href="../../_images/intellect_develop_8.png"><img alt="CyberItaly data processing management and development" src="../../_images/intellect_develop_8.png" style="width: 25%;" />
+</a>
+</section>
+<section id="integration-hints">
+<h2>Integration hints<a class="headerlink" href="#integration-hints" title="Link to this heading">&#128279</a></h2>
+<section id="cloud-optimized-geotiff-cog">
+<h3>Cloud Optimized GeoTIFF (COG)<a class="headerlink" href="#cloud-optimized-geotiff-cog" title="Link to this heading">&#128279</a></h3>
+<p>In order to ensure proper performance in visualization we recommend to execute the following lines of GDAL code to all raster data which your service generates as output files and that may be ingested into GeoServer or used in any other visualization or direct data access tool:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">gdaladdo -r average  $PROC_DIR/input.tif</span>
+<span class="go">gdal_translate $PROC_DIR/input.tif $OUT_DIR/cog/cog.tif -co TILED=YES -co COMPRESS=JPEG -co COPY_SRC_OVERVIEWS=YES</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="extra-service-templates">
+<h2>Extra: Service templates<a class="headerlink" href="#extra-service-templates" title="Link to this heading">&#128279</a></h2>
+<p>Service Templates are partial specification of services that can be used as blueprints to create new services. Using the <em>Service templates</em> button in the left sidebar, users can start defining their own service templates.</p>
+<p>In order to create the service template, the following information must be provided:</p>
+<ul class="simple">
+<li><p><em>Service Type.</em> The type of service template to be created (see <a class="reference internal" href="#descriptor"><span class="std std-ref">Descriptor</span></a> for details)</p></li>
+<li><p><em>Name.</em> The service template name. It has to start with a letter, and only contain letters and numbers. No spaces or special characters allowed.</p></li>
+<li><p><em>Title.</em> This can be used to give a user friendly name to the service template</p></li>
+<li><p><em>Description.</em> Here the developer can provide a longer, natural language description of the service template.</p></li>
+<li><p><em>Provider</em>. This is useful to identify the entity or person providing the service.</p></li>
+<li><p><em>Version</em>. This is useful to version the service.</p></li>
+</ul>
+<p>On the next screen, the user can start defining the service template specification.</p>
+<section id="service-templates-specification">
+<h3>Service templates specification<a class="headerlink" href="#service-templates-specification" title="Link to this heading">&#128279</a></h3>
+<p>A service template specification is a partial version of a service specification. It includes the following subset of elements from service specification</p>
+<ul class="simple">
+<li><p>The <em>Descriptor</em> describe properties of the service (including its name, title, description, version and service type).</p></li>
+<li><p>The <em>Sources</em> tab allows the creation of the files that compose the service.</p></li>
+<li><p>The <em>Input definitions</em> tab is used for the specification of the service inputs.</p></li>
+<li><p>The <em>Output definitions</em> tab is used for the specification of the service outputs.</p></li>
+</ul>
+<p>Refer to the <a class="reference internal" href="#service-specification"><span class="std std-ref">Service Specification</span></a> section for a description of these elements.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="monitor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Monitor your processing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="services/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Processing Services</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-feature">Accessing the feature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-new-service">Creating a new service</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service-specification">Service Specification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptor">Descriptor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-definitions">Input definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behaviour-for-inputs">Behaviour for inputs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-definitions">Output definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#behaviour-for-outputs">Behaviour for outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-image">Building the image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-hints">Integration hints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloud-optimized-geotiff-cog">Cloud Optimized GeoTIFF (COG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-service-templates">Extra: Service templates</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#service-templates-specification">Service templates specification</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/components/intellect/develop.rst"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (&#39;2026&#39;, &#39;IRIDE CyberItaly team&#39;).
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__center">
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
