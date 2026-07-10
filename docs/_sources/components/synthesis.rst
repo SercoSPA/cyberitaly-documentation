@@ -16,18 +16,14 @@ digital twin's outputs.
 
 .. image:: ../images/synthesis_1.png
    :alt: CyberItaly EO Dashboards and Analytics
-   :width: 50%
+   
 
-
-   Selection of the two what-if scenarios to compare, generated from
-   different forecast data for the same digital twin.
+Selection of the two what-if scenarios to compare, generated from different forecast data for the same digital twin.
 
 .. image:: ../images/synthesis_2.png
    :alt: CyberItaly EO Dashboards and Analytics
-   :width: 50%
-
-   Side-by-side comparison view highlighting the differences between the
-   two selected scenarios.
+   
+Side-by-side comparison view highlighting the differences between the two selected scenarios.
 
 .. TODO:
    1. Sostituire i due percorsi immagine sopra con quelli reali una volta
